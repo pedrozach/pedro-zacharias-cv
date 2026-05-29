@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedro Zacharias — AI Data Engineer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3e;
+      --accent: #6c63ff;
+      --accent2: #00d4aa;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --tag-bg: #1e2235;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    header {
+      background: linear-gradient(135deg, #0f1117 0%, #1a1530 50%, #0d1f2d 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 40px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,99,255,.15) 0%, transparent 70%);
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 30%;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,170,.10) 0%, transparent 70%);
+    }
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #fff 0%, #c7c2ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--accent2);
+      font-weight: 500;
+      margin-top: 6px;
+      letter-spacing: .5px;
+    }
+    .contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .contacts a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color .2s;
+    }
+    .contacts a:hover { color: var(--accent2); }
+    .contacts svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 40px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* ── SECTION ── */
+    section {}
+    .section-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 16px;
+      transition: border-color .2s;
+    }
+    .card:last-child { margin-bottom: 0; }
+    .card:hover { border-color: #3a3d5e; }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .card-company {
+      color: var(--accent2);
+      font-weight: 500;
+    }
+    .card-date {
+      font-size: .82rem;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 3px;
+    }
+    .card-desc {
+      font-size: .9rem;
+      color: #a8b4c6;
+      margin-bottom: 14px;
+    }
+    .card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card ul li {
+      font-size: .88rem;
+      color: #9ba8be;
+      padding-left: 20px;
+      position: relative;
+    }
+    .card ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: .75rem;
+      top: 3px;
+    }
+
+    /* ── HIGHLIGHT BADGE ── */
+    .badge {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: rgba(108,99,255,.18);
+      color: #a09aff;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+    .badge.green {
+      background: rgba(0,212,170,.15);
+      color: #00d4aa;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-meta {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .edu-meta span { color: var(--accent2); font-weight: 600; }
+    .thesis {
+      margin-top: 14px;
+      padding: 14px 18px;
+      background: var(--bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      font-size: .86rem;
+      color: #9ba8be;
+    }
+    .thesis strong { color: var(--text); display: block; margin-bottom: 6px; }
+    .thesis a { color: var(--accent2); text-decoration: none; }
+    .thesis a:hover { text-decoration: underline; }
+
+    /* ── SKILLS GRID ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .skill-group h4 {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: .78rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: #a8b4c6;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    .certs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .cert {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: .85rem;
+      color: var(--text);
+    }
+    .cert-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent2);
+      flex-shrink: 0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header { padding: 48px 24px 36px; }
+      main { padding: 36px 24px 60px; }
+      .card { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hero-inner">
+    <h1>Pedro Zacharias</h1>
+    <p class="subtitle">AI Data Engineer &nbsp;·&nbsp; +6 Years of Experience</p>
+    <div class="contacts">
+      <a href="mailto:pedro.zacharias@hotmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+        pedro.zacharias@hotmail.com
+      </a>
+      <a href="https://linkedin.com/in/pedrozacharias/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        /in/pedrozacharias
+      </a>
+      <a href="tel:+351967939358">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +351 967 939 358
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── EXPERIENCE ── -->
+  <section>
+    <div class="section-label">Experience</div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span class="card-title">AI Engineer</span>
+          <span class="badge green">Current</span>
+          <div class="card-company">OLX Group</div>
+        </div>
+        <span class="card-date">Nov 2024 — Present</span>
+      </div>
+      <ul>
+        <li>Developed an internal AI agent that transforms natural-language business questions into actionable answers, using LLMs, vector search, and RAG-style pipelines served through company-wide APIs and MCP tools.</li>
+        <li>Designed multi-use-case AI agent workflows using agentic frameworks such as PydanticAI and LangGraph.</li>
+        <li>Built scalable API and MCP server integrations to serve the agent and connect it to other internal APIs and agents via MCP using FastAPI.</li>
+        <li>Defined semantic schemas, key business metrics, and embeddings-ready structures leveraging OpenMetadata for data governance and Qdrant for semantic search to improve knowledge grounding and model accuracy.</li>
+        <li>Designed evaluation workflows using Arize to assess response correctness, safety, and alignment with business rules, ensuring consistent model performance and agent SLAs.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span class="card-title">Data Engineer</span>
+          <div class="card-company">OLX Group</div>
+        </div>
+        <span class="card-date">Nov 2022 — Nov 2024</span>
+      </div>
+      <p class="card-desc">Part of the Data Domain Team implementing Data Mesh principles, collaborating with Backend Engineers, Product Analysts, and Data Scientists to foster decentralized data ownership and domain-oriented solutions.</p>
+      <ul>
+        <li>Built domain-oriented data products for Motors platforms serving 2M+ MAU and processing 10M+ behavioural events/day.</li>
+        <li>Reduced daily pipeline runtime from 8h to 1h and cut AWS Spectrum costs by 80% by refactoring datasets (column optimization, table decoupling, idempotent Airflow pipelines).</li>
+        <li>Operationalised Data Science workflows: refactored Python/Spark/SQL code, set up CI/CD (GitLab, Docker), provisioned infrastructure with Terraform, and integrated MLflow for reproducible tracking.</li>
+        <li>Developed and maintained low-latency APIs (AWS API Gateway, FastAPI) handling 30K+ monthly requests, with monitoring via New Relic dashboards and alerts.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span class="card-title">Junior / Mid Data Engineer</span>
+          <div class="card-company">Hiscox</div>
+        </div>
+        <span class="card-date">May 2020 — Nov 2022</span>
+      </div>
+      <p class="card-desc">Part of the team responsible for building the European Data Ecosystem from scratch for over 400 employees using the most up-to-date cloud technologies in Azure.</p>
+      <ul>
+        <li>Delivered critical data pipelines and reports for the Underwriting domain, helping achieve the team's objective of delivering over 50 reports in 1 year.</li>
+        <li>Implemented data pipelines in a Data Lake + Data Warehouse architecture and built Power BI reports to present the final data.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span class="card-title">Junior Consultant</span>
+          <div class="card-company">Winsig</div>
+        </div>
+        <span class="card-date">Sep 2019 — Apr 2020</span>
+      </div>
+      <p class="card-desc">Professional internship at the leading consulting company for ERP PHC, working as a consultant.</p>
+    </div>
+  </section>
+
+  <!-- ── EDUCATION ── -->
+  <section>
+    <div class="section-label">Education</div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span class="card-title">MSc Business Intelligence</span>
+          <div class="card-company">NOVA IMS University</div>
+        </div>
+        <span class="card-date">2019 — 2021</span>
+      </div>
+      <p class="edu-meta">GPA <span>16 / 20</span> &nbsp;·&nbsp; Best Courses: Big Data, Final Project, Business Intelligence II</p>
+      <div class="thesis">
+        <strong>Master Thesis</strong>
+        Developed a framework for Lisbon City Council to analyse 5 years of data on Local Cultural Policies, improving the management of their main activities. Built in collaboration with the Lisbon Municipal Directorate of Culture, based on the UNESCO Framework for Cultural Statistics (FCS). Data integration, transformation, and presentation were done using Power BI as an ETL tool and report builder. The final report is actively used by the entity to manage financial and non-financial support to cultural agents.
+        <br /><br />Grade: <strong style="color:#00d4aa">18 / 20</strong> &nbsp;—&nbsp;
+        <a href="https://run.unl.pt/handle/10362/134519" target="_blank" rel="noopener">Published in UNL Repository ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span class="card-title">BSc Business Administration</span>
+          <div class="card-company">Universidade Europeia</div>
+        </div>
+        <span class="card-date">2016 — 2019</span>
+      </div>
+      <p class="edu-meta">GPA <span>15 / 20</span> &nbsp;·&nbsp; Merit scholarship for the entire degree</p>
+      <p class="card-desc" style="margin-top:10px">Best Courses: Financial Calculations, Governance Models, Management Cases, Cost Accounting, Leadership and Team Management.</p>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section>
+    <div class="section-label">Skills &amp; Technologies</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Cloud &amp; Infra</h4>
+        <div class="tags">
+          <span class="tag">AWS</span>
+          <span class="tag">Azure</span>
+          <span class="tag">Terraform</span>
+          <span class="tag">K8S</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Data &amp; Pipelines</h4>
+        <div class="tags">
+          <span class="tag">Airflow</span>
+          <span class="tag">Redshift</span>
+          <span class="tag">Trino</span>
+          <span class="tag">Spark</span>
+          <span class="tag">Power BI</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>AI &amp; ML</h4>
+        <div class="tags">
+          <span class="tag">LLMs</span>
+          <span class="tag">RAG</span>
+          <span class="tag">PydanticAI</span>
+          <span class="tag">LangGraph</span>
+          <span class="tag">MLflow</span>
+          <span class="tag">Qdrant</span>
+          <span class="tag">Arize</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Bash</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>APIs &amp; DevOps</h4>
+        <div class="tags">
+          <span class="tag">FastAPI</span>
+          <span class="tag">MCP</span>
+          <span class="tag">GitLab CI</span>
+          <span class="tag">New Relic</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Data Governance</h4>
+        <div class="tags">
+          <span class="tag">OpenMetadata</span>
+          <span class="tag">Data Mesh</span>
+          <span class="tag">dbt</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CERTIFICATIONS ── -->
+  <section>
+    <div class="section-label">Certifications</div>
+    <div class="certs">
+      <div class="cert"><span class="cert-dot"></span>GenAI Nanodegree — Udacity</div>
+      <div class="cert"><span class="cert-dot"></span>AWS Cloud Practitioner</div>
+      <div class="cert"><span class="cert-dot"></span>DP-203 — Azure Data Engineer</div>
+      <div class="cert"><span class="cert-dot"></span>DA-100 — Power BI</div>
+      <div class="cert"><span class="cert-dot"></span>DP-900 — Azure Data Fundamentals</div>
+      <div class="cert"><span class="cert-dot"></span>AZ-900 — Azure Fundamentals</div>
+    </div>
+  </section>
+
+  <!-- ── LANGUAGES & INTERESTS ── -->
+  <section>
+    <div class="section-label">Languages &amp; Interests</div>
+    <div class="card" style="display:flex;flex-wrap:wrap;gap:32px">
+      <div>
+        <h4 style="font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:10px">Languages</h4>
+        <div class="tags">
+          <span class="tag">Portuguese — Native</span>
+          <span class="tag">English — Fluent</span>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:10px">Interests</h4>
+        <div class="tags">
+          <span class="tag">Travel</span>
+          <span class="tag">Cooking</span>
+          <span class="tag">Data</span>
+          <span class="tag">Investments</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
