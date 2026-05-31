@@ -275,6 +275,46 @@
       flex-shrink: 0;
     }
 
+    /* ── COLLAPSE TOGGLE ── */
+    #experience .card {
+      cursor: pointer;
+      user-select: none;
+    }
+    .card-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .toggle-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      padding: 2px;
+      cursor: pointer;
+      line-height: 0;
+      flex-shrink: 0;
+      transition: color .2s;
+    }
+    .toggle-btn svg {
+      width: 15px;
+      height: 15px;
+      transition: transform .3s ease;
+    }
+    #experience .card.collapsed .toggle-btn svg {
+      transform: rotate(-90deg);
+    }
+    #experience .card-header:hover .toggle-btn { color: var(--accent2); }
+    .card-body {
+      overflow: hidden;
+      max-height: 800px;
+      opacity: 1;
+      transition: max-height .35s ease, opacity .25s ease;
+    }
+    #experience .card.collapsed .card-body {
+      max-height: 0;
+      opacity: 0;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       header { padding: 48px 24px 36px; }
@@ -309,7 +349,7 @@
 <main>
 
   <!-- ── EXPERIENCE ── -->
-  <section>
+  <section id="experience">
     <div class="section-label">Experience</div>
 
     <div class="card">
@@ -319,69 +359,104 @@
           <span class="badge green">In Progress</span>
           <div class="card-company">OLX Group</div>
         </div>
-        <span class="card-date">May 2026 — Present · 1 mo</span>
+        <div class="card-right">
+          <span class="card-date">May 2026 — Present · 1 mo</span>
+          <button class="toggle-btn" aria-label="Toggle details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
       </div>
-      <p class="card-desc">Recently promoted to Senior Data Engineer, role just started, more to come.</p>
+      <div class="card-body">
+        <p class="card-desc">Recently promoted to Senior Data Engineer, role just started, more to come.</p>
+      </div>
     </div>
 
-    <div class="card">
+    <div class="card collapsed">
       <div class="card-header">
         <div>
           <span class="card-title">Data Engineer</span>
           <div class="card-company">OLX Group</div>
         </div>
-        <span class="card-date">Apr 2024 — May 2026 · 2 yrs 2 mos</span>
+        <div class="card-right">
+          <span class="card-date">Apr 2024 — May 2026 · 2 yrs 2 mos</span>
+          <button class="toggle-btn" aria-label="Toggle details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
       </div>
-      <p class="card-desc">Part of the Data Domain Team implementing Data Mesh principles, evolving from building robust data products to developing AI-powered solutions, collaborating with Backend Engineers, Product Analysts, and Data Scientists to deliver domain-oriented, decentralized data ownership.</p>
-      <ul>
-        <li>Built domain-oriented data products for Motors platforms serving 2M+ MAU and processing 10M+ behavioural events/day.</li>
-        <li>Reduced daily pipeline runtime from 8h to 1h and cut AWS Spectrum costs by 80% by refactoring datasets (column optimization, table decoupling, idempotent Airflow pipelines).</li>
-        <li>Operationalised Data Science workflows: refactored Python/Spark/SQL code, set up CI/CD (GitLab, Docker), provisioned infrastructure with Terraform, and integrated MLflow for reproducible tracking.</li>
-        <li>Developed and maintained low-latency APIs (AWS API Gateway, FastAPI) handling 30K+ monthly requests, with monitoring via New Relic dashboards and alerts.</li>
-        <li>Developed an internal AI agent transforming natural-language business questions into actionable answers, using LLMs, vector search, and RAG-style pipelines served through company-wide APIs and MCP tools.</li>
-      </ul>
+      <div class="card-body">
+        <p class="card-desc">Part of the Data Domain Team implementing Data Mesh principles, evolving from building robust data products to developing AI-powered solutions, collaborating with Backend Engineers, Product Analysts, and Data Scientists to deliver domain-oriented, decentralized data ownership.</p>
+        <ul>
+          <li>Built domain-oriented data products for Motors platforms serving 2M+ MAU and processing 10M+ behavioural events/day.</li>
+          <li>Reduced daily pipeline runtime from 8h to 1h and cut AWS Spectrum costs by 80% by refactoring datasets (column optimization, table decoupling, idempotent Airflow pipelines).</li>
+          <li>Operationalised Data Science workflows: refactored Python/Spark/SQL code, set up CI/CD (GitLab, Docker), provisioned infrastructure with Terraform, and integrated MLflow for reproducible tracking.</li>
+          <li>Developed and maintained low-latency APIs (AWS API Gateway, FastAPI) handling 30K+ monthly requests, with monitoring via New Relic dashboards and alerts.</li>
+          <li>Developed an internal AI agent transforming natural-language business questions into actionable answers, using LLMs, vector search, and RAG-style pipelines served through company-wide APIs and MCP tools.</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="card">
+    <div class="card collapsed">
       <div class="card-header">
         <div>
           <span class="card-title">Junior Data Engineer</span>
           <div class="card-company">OLX Group</div>
         </div>
-        <span class="card-date">Nov 2022 — Apr 2024 · 1 yr 6 mos</span>
+        <div class="card-right">
+          <span class="card-date">Nov 2022 — Apr 2024 · 1 yr 6 mos</span>
+          <button class="toggle-btn" aria-label="Toggle details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
       </div>
-      <p class="card-desc">Part of the Data Domain Team implementing Data Mesh principles across the company — developing data pipelines, refining data models, and driving data engineering best practices to foster decentralized data ownership and domain-oriented design using AWS, Trino, and Airflow.</p>
-      <ul>
-        <li>Developed entirely new domain-oriented data models to support vital domain analysis: modelled data from business needs, built batch-processing pipelines, and refactored unstructured processes into optimized models by decoupling large tables, making pipelines idempotent, and optimizing column partitions, distributions, and compression — reducing AWS Spectrum usage by up to 80% by syncing data from S3 to Redshift.</li>
-        <li>Assisted Analytics and Data Science teams in setting up Data Infrastructure resources, including S3, GitLab, and Airflow instances; promoted decentralized Data Ownership through Data Contracts, Data Quality alerts, Catalog Management, and governance practices.</li>
-        <li>Acted as Scrum Master for a team of 9 Data Engineers — facilitating Scrum ceremonies, organizing JIRA to team standards, implementing an Incident &amp; Response Workflow with PagerDuty, and introducing OKR Monitoring in Jira.</li>
-      </ul>
+      <div class="card-body">
+        <p class="card-desc">Part of the Data Domain Team implementing Data Mesh principles across the company — developing data pipelines, refining data models, and driving data engineering best practices to foster decentralized data ownership and domain-oriented design using AWS, Trino, and Airflow.</p>
+        <ul>
+          <li>Developed entirely new domain-oriented data models to support vital domain analysis: modelled data from business needs, built batch-processing pipelines, and refactored unstructured processes into optimized models by decoupling large tables, making pipelines idempotent, and optimizing column partitions, distributions, and compression — reducing AWS Spectrum usage by up to 80% by syncing data from S3 to Redshift.</li>
+          <li>Assisted Analytics and Data Science teams in setting up Data Infrastructure resources, including S3, GitLab, and Airflow instances; promoted decentralized Data Ownership through Data Contracts, Data Quality alerts, Catalog Management, and governance practices.</li>
+          <li>Acted as Scrum Master for a team of 9 Data Engineers — facilitating Scrum ceremonies, organizing JIRA to team standards, implementing an Incident &amp; Response Workflow with PagerDuty, and introducing OKR Monitoring in Jira.</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="card">
+    <div class="card collapsed">
       <div class="card-header">
         <div>
           <span class="card-title">Junior / Mid Data Engineer</span>
           <div class="card-company">Hiscox</div>
         </div>
-        <span class="card-date">May 2020 — Nov 2022</span>
+        <div class="card-right">
+          <span class="card-date">May 2020 — Nov 2022</span>
+          <button class="toggle-btn" aria-label="Toggle details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
       </div>
-      <p class="card-desc">Part of the team responsible for building the European Data Ecosystem from scratch for over 400 employees using the most up-to-date cloud technologies in Azure.</p>
-      <ul>
-        <li>Delivered critical data pipelines and reports for the Underwriting domain, helping achieve the team's objective of delivering over 50 reports in 1 year.</li>
-        <li>Implemented data pipelines in a Data Lake + Data Warehouse architecture and built Power BI reports to present the final data.</li>
-      </ul>
+      <div class="card-body">
+        <p class="card-desc">Part of the team responsible for building the European Data Ecosystem from scratch for over 400 employees using the most up-to-date cloud technologies in Azure.</p>
+        <ul>
+          <li>Delivered critical data pipelines and reports for the Underwriting domain, helping achieve the team's objective of delivering over 50 reports in 1 year.</li>
+          <li>Implemented data pipelines in a Data Lake + Data Warehouse architecture and built Power BI reports to present the final data.</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="card">
+    <div class="card collapsed">
       <div class="card-header">
         <div>
           <span class="card-title">Junior Consultant</span>
           <div class="card-company">Winsig</div>
         </div>
-        <span class="card-date">Sep 2019 — Apr 2020</span>
+        <div class="card-right">
+          <span class="card-date">Sep 2019 — Apr 2020</span>
+          <button class="toggle-btn" aria-label="Toggle details">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
       </div>
-      <p class="card-desc">Professional internship at the leading consulting company for ERP PHC, working as a consultant.</p>
+      <div class="card-body">
+        <p class="card-desc">Professional internship at the leading consulting company for ERP PHC, working as a consultant.</p>
+      </div>
     </div>
   </section>
 
@@ -521,5 +596,12 @@
 
 </main>
 
+<script>
+  document.querySelectorAll('#experience .card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('collapsed');
+    });
+  });
+</script>
 </body>
 </html>
